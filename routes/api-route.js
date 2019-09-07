@@ -1,12 +1,15 @@
 var tableData = require('../tableinfo/table-data.js');
 var waitListData = require('../tableinfo/waitlist-data.js');
+
 module.exports = function (app) {
-    app.get('/api/table', function(req, res) {
+    app.get('/api/tables', function(req, res) {
         res.json(tableData);
     });
+
     app.get('/api/waitlist', function(req, res) {
         res.json(waitListData);
     });
+
     app.post('/api/tables', function(req, res)   {
         if(tableData.length < 5)    {
             tableData.push(req.body);
@@ -16,9 +19,11 @@ module.exports = function (app) {
             res.json(false);
         }
     });
+
     app.post('/api/clear', function()   {
         tableData = [];
         waitListData = [];
+
         console.log(tableData);
         console.log(waitListData);
     })
